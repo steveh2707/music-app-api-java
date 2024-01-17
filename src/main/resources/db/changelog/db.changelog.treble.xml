@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+        http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd">
+
+    <changeSet  id="1"  author="stephen.hanna">
+        <preConditions onFail="WARN">
+            <not>
+                <tableExists tableName="user"></tableExists>
+            </not>
+        </preConditions>
+        <sql>
+            create table user
+            (
+                user_id              int auto_increment
+                    primary key,
+                first_name           varchar(255)                       not null,
+                last_name            varchar(255)                       not null,
+                email                varchar(255)                       not null,
+                password_hash        varchar(255)                       null,
+                dob                  date                               not null,
+                registered_timestamp datetime default CURRENT_TIMESTAMP not null,
+                last_login_timestamp datetime default CURRENT_TIMESTAMP not null,
+                s3_image_name        varchar(255)                       not null,
+                constraint email
+                    unique (email)
+            );
+        </sql>
+    </changeSet>
+
+    <changeSet  id="2"  author="stephen.hanna">
+        <preConditions onFail="WARN">
+            <not>
+                <tableExists tableName="user"></tableExists>
+            </not>
+        </preConditions>
+        <sql>
+            INSERT INTO `user` (`user_id`, `first_name`, `last_name`, `email`, `password_hash`, `dob`, `registered_timestamp`, `last_login_timestamp`, `s3_image_name`) VALUES
+                (1, 'John', 'Smith', 'johnsmith@hotmail.co.uk', '$2b$10$.IMEEKDh.cJKJnBwgTKmuuFr/rXGWUV63V52DZIc7jEf0OooJbKES', '1983-04-02', '2023-06-13 10:48:39', '2023-09-15 17:17:20', '03C19690.jpg'),
+                (2, 'Field', 'Rawsthorn', 'frawsthorn0@google.co.jp', '$2b$10$.IMEEKDh.cJKJnBwgTKmuuFr/rXGWUV63V52DZIc7jEf0OooJbKES', '1974-04-25', '2023-06-13 14:03:16', '2023-06-13 14:03:16', 'APUF3QLQ.jpg'),
+                (3, 'Marin', 'Guidera', 'mguidera1@bing.com', '$2b$10$.IMEEKDh.cJKJnBwgTKmuuFr/rXGWUV63V52DZIc7jEf0OooJbKES', '1995-01-20', '2023-06-13 14:03:16', '2023-06-13 14:03:16', '6QYRW56H.jpg'),
+                (4, 'Winifred', 'Ferrarese', 'wferrarese2@ucoz.com', '$2b$10$.IMEEKDh.cJKJnBwgTKmuuFr/rXGWUV63V52DZIc7jEf0OooJbKES', '1979-12-01', '2023-06-13 14:03:16', '2023-06-13 14:03:16', 'GFSQH6ST.jpg'),
+                (5, 'Dilly', 'Conti', 'dconti3@miitbeian.gov.cn', '$2b$10$.IMEEKDh.cJKJnBwgTKmuuFr/rXGWUV63V52DZIc7jEf0OooJbKES', '1987-01-30', '2023-06-13 14:03:16', '2023-06-13 14:03:16', 'TZATHUW3.jpg'),
+                (6, 'Frederick', 'Cotman', 'fcotman4@time.com', '$2b$10$.IMEEKDh.cJKJnBwgTKmuuFr/rXGWUV63V52DZIc7jEf0OooJbKES', '1972-08-03', '2023-06-13 14:03:16', '2023-06-13 14:03:16', 'UQDB9SAP.jpg'),
+                (7, 'Anthe', 'Seleway', 'aseleway5@gmpg.org', '$2b$10$.IMEEKDh.cJKJnBwgTKmuuFr/rXGWUV63V52DZIc7jEf0OooJbKES', '1970-06-24', '2023-06-13 14:03:16', '2023-06-13 14:03:16', 'DTXM3RF4.jpg'),
+                (8, 'Ninetta', 'Birtley', 'nbirtley6@mlb.com', '$2b$10$.IMEEKDh.cJKJnBwgTKmuuFr/rXGWUV63V52DZIc7jEf0OooJbKES', '1976-12-07', '2023-06-13 14:03:16', '2023-06-13 14:03:16', '536J69TL.jpg'),
+                (9, 'Sheila', 'Filer', 'sfiler7@seesaa.net', '$2b$10$.IMEEKDh.cJKJnBwgTKmuuFr/rXGWUV63V52DZIc7jEf0OooJbKES', '1983-06-10', '2023-06-13 14:03:16', '2023-06-13 14:03:16', 'S9CGA8FK.jpg'),
+                (10, 'Blondy', 'Duthie', 'bduthie8@home.pl', '$2b$10$.IMEEKDh.cJKJnBwgTKmuuFr/rXGWUV63V52DZIc7jEf0OooJbKES', '1997-04-21', '2023-06-13 14:03:16', '2023-06-13 14:03:16', 'XR8DT9KU.jpg'),
+                (11, 'Darell', 'Jannings', 'djannings9@forbes.com', '$2b$10$.IMEEKDh.cJKJnBwgTKmuuFr/rXGWUV63V52DZIc7jEf0OooJbKES', '1992-02-05', '2023-06-13 14:03:16', '2023-06-13 14:03:16', 'V7VAF8AH.jpg'),
+                (12, 'Remington', 'Haruard', 'rharuard0@imgur.com', '$2b$10$.IMEEKDh.cJKJnBwgTKmuuFr/rXGWUV63V52DZIc7jEf0OooJbKES', '1960-06-16', '2023-01-23 12:14:43', '2022-07-04 09:15:17', 'Y2X44H7E.jpg'),
+                (13, 'Gwendolen', 'Orthmann', 'gorthmann1@cbc.ca', '$2b$10$.IMEEKDh.cJKJnBwgTKmuuFr/rXGWUV63V52DZIc7jEf0OooJbKES', '1996-02-28', '2023-06-02 18:33:27', '2023-06-11 04:20:02', ''),
+                (14, 'Ximenes', 'Issacof', 'xissacof2@weather.com', '$2b$10$.IMEEKDh.cJKJnBwgTKmuuFr/rXGWUV63V52DZIc7jEf0OooJbKES', '1974-12-02', '2023-03-07 11:08:47', '2023-05-13 00:39:42', ''),
+                (15, 'Scarface', 'Jeaffreson', 'sjeaffreson3@storify.com', '$2b$10$.IMEEKDh.cJKJnBwgTKmuuFr/rXGWUV63V52DZIc7jEf0OooJbKES', '1968-12-21', '2022-05-22 08:34:31', '2023-06-06 01:55:45', 'PQQ36LLN.jpg'),
+                (16, 'Steve', 'Hanna', 'shanna@gmail.com', '$2b$10$.IMEEKDh.cJKJnBwgTKmuuFr/rXGWUV63V52DZIc7jEf0OooJbKES', '1969-11-11', '2022-10-03 17:52:49', '2023-09-15 15:58:04', 'F973E47A.jpg'),
+                (17, 'Ariana', 'Iacovielli', 'aiacovielli5@about.me', '$2b$10$.IMEEKDh.cJKJnBwgTKmuuFr/rXGWUV63V52DZIc7jEf0OooJbKES', '1992-04-05', '2022-09-25 20:10:08', '2023-04-15 04:26:44', ''),
+                (18, 'Shirlene', 'Emlen', 'semlen6@topsy.com', '$2b$10$.IMEEKDh.cJKJnBwgTKmuuFr/rXGWUV63V52DZIc7jEf0OooJbKES', '1996-03-27', '2023-05-23 22:03:35', '2022-09-24 13:51:56', ''),
+                (19, 'Valentin', 'Rathbourne', 'vrathbourne7@princeton.edu', '$2b$10$.IMEEKDh.cJKJnBwgTKmuuFr/rXGWUV63V52DZIc7jEf0OooJbKES', '1992-11-23', '2022-06-19 11:30:28', '2023-01-28 09:37:04', ''),
+                (20, 'Koral', 'Jiroutek', 'kjiroutek8@merriam-webster.com', '$2b$10$.IMEEKDh.cJKJnBwgTKmuuFr/rXGWUV63V52DZIc7jEf0OooJbKES', '2010-03-18', '2022-05-06 01:29:04', '2022-12-23 06:15:45', ''),
+                (21, 'Aliza', 'Jakoubek', 'ajakoubek9@yelp.com', '$2b$10$.IMEEKDh.cJKJnBwgTKmuuFr/rXGWUV63V52DZIc7jEf0OooJbKES', '1980-10-04', '2023-03-27 19:06:48', '2022-12-17 14:25:39', ''),
+                (22, 'Dewie', 'Elvy', 'delvya@w3.org', '$2b$10$.IMEEKDh.cJKJnBwgTKmuuFr/rXGWUV63V52DZIc7jEf0OooJbKES', '1965-12-09', '2023-06-06 16:26:23', '2023-02-22 07:28:04', ''),
+                (23, 'Raimondo', 'Hawkin', 'rhawkinb@ifeng.com', '$2b$10$.IMEEKDh.cJKJnBwgTKmuuFr/rXGWUV63V52DZIc7jEf0OooJbKES', '1980-12-22', '2022-12-13 04:12:53', '2023-03-02 02:14:39', ''),
+                (24, 'Consuela', 'Batham', 'cbathamc@zdnet.com', '$2b$10$.IMEEKDh.cJKJnBwgTKmuuFr/rXGWUV63V52DZIc7jEf0OooJbKES', '1967-11-05', '2022-12-15 23:52:33', '2022-08-14 06:35:40', ''),
+                (25, 'Spense', 'Elgar', 'selgard@huffingtonpost.com', '$2b$10$.IMEEKDh.cJKJnBwgTKmuuFr/rXGWUV63V52DZIc7jEf0OooJbKES', '1964-01-23', '2022-10-12 08:04:37', '2022-07-25 15:21:21', ''),
+                (26, 'Babita', 'Stihl', 'bstihle@youtube.com', '$2b$10$.IMEEKDh.cJKJnBwgTKmuuFr/rXGWUV63V52DZIc7jEf0OooJbKES', '1993-08-28', '2022-05-28 09:39:19', '2022-11-01 09:21:42', ''),
+                (27, 'Brianna', 'Poxson', 'bpoxsonf@flavors.me', '$2b$10$.IMEEKDh.cJKJnBwgTKmuuFr/rXGWUV63V52DZIc7jEf0OooJbKES', '2005-12-19', '2022-05-11 18:12:55', '2023-06-03 20:43:14', ''),
+                (28, 'Barbabas', 'Pennone', 'bpennoneg@canalblog.com', '$2b$10$.IMEEKDh.cJKJnBwgTKmuuFr/rXGWUV63V52DZIc7jEf0OooJbKES', '1977-08-17', '2022-05-10 21:44:47', '2023-02-07 20:51:31', ''),
+                (29, 'Blanch', 'Jiri', 'bjirih@xrea.com', '$2b$10$.IMEEKDh.cJKJnBwgTKmuuFr/rXGWUV63V52DZIc7jEf0OooJbKES', '1978-07-23', '2022-10-05 21:29:59', '2023-03-23 05:21:39', ''),
+                (30, 'Flss', 'Mattock', 'fmattocki@symantec.com', '$2b$10$.IMEEKDh.cJKJnBwgTKmuuFr/rXGWUV63V52DZIc7jEf0OooJbKES', '2004-10-23', '2023-02-28 13:27:18', '2022-09-12 16:30:12', ''),
+                (31, 'Saundra', 'Levett', 'slevettj@dion.ne.jp', '$2b$10$.IMEEKDh.cJKJnBwgTKmuuFr/rXGWUV63V52DZIc7jEf0OooJbKES', '1978-03-08', '2022-09-14 10:45:25', '2023-02-04 00:18:10', ''),
+                (36, 'test', 'Test', 'test@test.com', '$2b$10$nXQP2RfpLLbYNcbObgqcaO0OKbW9x6.SHOLwN0VN4kkMogiN1X9DS', '2005-08-31', '2023-08-31 14:47:19', '2023-08-31 14:47:19', ''),
+                (37, 'Stephen', 'Hanna', 'test@test', '$2b$10$KD4CmPyqMrOGG5T3au4rp.mB3c9MbUknuwLAKTnuHDDeXevEkaWNW', '2010-09-15', '2023-09-15 15:49:55', '2023-09-15 15:49:55', '');
+        </sql>
+    </changeSet>
+
+    <changeSet  id="3"  author="stephen.hanna">
+        <preConditions onFail="WARN">
+            <not>
+                <tableExists tableName="teacher"></tableExists>
+            </not>
+        </preConditions>
+        <sql>
+            create table teacher
+            (
+                teacher_id           int auto_increment
+                    primary key,
+                tagline              varchar(255)               not null,
+                bio                  text                       not null,
+                location_title       varchar(255)               not null,
+                location_latitude    decimal(7, 4)              not null,
+                location_longitude   decimal(7, 4)              not null,
+                average_review_score double(4, 3) default 0.000 not null,
+                user_id              int                        not null,
+                constraint `teacher-user_id`
+                    foreign key (user_id) references music_app.user (user_id)
+            );
+        </sql>
+    </changeSet>
+
+    <changeSet  id="4"  author="stephen.hanna">
+        <preConditions onFail="WARN">
+            <not>
+                <tableExists tableName="teacher"></tableExists>
+            </not>
+        </preConditions>
+        <sql>
+            INSERT INTO teacher (teacher_id, tagline, bio, location_title, location_latitude, location_longitude, average_review_score, user_id) VALUES (1, 'Test Etiam tincidunt leo suscipit malesuada condimentum.', 'psum dolor sit amet, consectetur adipiscing elit. Fusce lorem turpis, semper eget arcu et, elementum accumsan justo. Nulla elementum urna a libero viverra, porttitor eleifend enim euismod. Etiam tincidunt leo suscipit malesuada condimentum. Duis vitae leo condimentum, volutpat nisi sed, ultrices lorem. Sed quis molestie purus, sit amet ullamcorper risus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Pellentesque vitae tincidunt odio. Phasellus fermentum nunc ut nisi aliquam condimentum. Suspendisse aliquet efficitur lectus, eget consequat ante pharetra ut. Suspendisse dictum ipsum quis metus vestibulum consectetur. Nunc convallis vitae nisl quis tristique. Sed efficitur ultrices ante sed malesuada. Maecenas non mi tristique tellus dictum dapibus. Nunc ornare nec ex ac porta. Maecenas ut diam sit amet urna molestie sagittis. Vestibulum eros nibh, convallis et ante et, rutrum aliquet sapien. Proin faucibus non est nec mattis. Aliquam ligula eros, posuere malesuada ligula eu, laoreet vestibulum metus. Ut nisi ante, suscipit non erat ut, iaculis facilisis eros. Cras sed nunc sit amet libero pharetra lacinia. In hac habitasse platea dictumst. Etiam dapibus tristique ante, in elementum libero congue vel. Nulla a placerat tortor, id rutrum enim. Aenean tortor justo, semper eget dapibus et, varius sed dui. ', 'Belfast', 54.5973, -5.9301, 3.75, 1);
+            INSERT INTO teacher (teacher_id, tagline, bio, location_title, location_latitude, location_longitude, average_review_score, user_id) VALUES (2, 'Duis aliquam convallis nunc.', 'Nulla tempus. Vivamus in felis eu sapien cursus vestibulum. Proin eu mi. Nulla ac enim. In tempor, turpis nec euismod scelerisque, quam turpis adipiscing lorem, vitae mattis nibh ligula nec sem. Duis aliquam convallis nunc. Proin at turpis a pede posuere nonummy. Integer non velit. Donec diam neque, vestibulum eget, vulputate ut, ultrices vel, augue. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec pharetra, magna vestibulum aliquet ultrices, erat tortor sollicitudin mi, sit amet lobortis sapien sapien non mi. Integer ac neque.', 'Lisburn', 54.5097, -6.0374, 0, 2);
+            INSERT INTO teacher (teacher_id, tagline, bio, location_title, location_latitude, location_longitude, average_review_score, user_id) VALUES (3, 'In blandit ultrices enim.', 'Praesent id massa id nisl venenatis lacinia. Aenean sit amet justo. Morbi ut odio. Cras mi pede, malesuada in, imperdiet et, commodo vulputate, justo. In blandit ultrices enim. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Proin interdum mauris non ligula pellentesque ultrices. Phasellus id sapien in sapien iaculis congue. Vivamus metus arcu, adipiscing molestie, hendrerit at, vulputate vitae, nisl. Aenean lectus. Pellentesque eget nunc. Donec quis orci eget orci vehicula condimentum.', 'London', 51.5099, -0.1181, 0, 3);
+            INSERT INTO teacher (teacher_id, tagline, bio, location_title, location_latitude, location_longitude, average_review_score, user_id) VALUES (4, 'Sed sagittis.', 'Aenean sit amet justo. Morbi ut odio. Cras mi pede, malesuada in, imperdiet et, commodo vulputate, justo. In blandit ultrices enim. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Proin interdum mauris non ligula pellentesque ultrices. Phasellus id sapien in sapien iaculis congue. Vivamus metus arcu, adipiscing molestie, hendrerit at, vulputate vitae, nisl.', 'Manchester', 53.4840, -2.2446, 0, 4);
+            INSERT INTO teacher (teacher_id, tagline, bio, location_title, location_latitude, location_longitude, average_review_score, user_id) VALUES (5, 'Aliquam sit amet diam in magna bibendum imperdiet.', 'Donec ut mauris eget massa tempor convallis. Nulla neque libero, convallis eget, eleifend luctus, ultricies eu, nibh. Quisque id justo sit amet sapien dignissim vestibulum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla dapibus dolor vel est. Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros. Vestibulum ac est lacinia nisi venenatis tristique. Fusce congue, diam id ornare imperdiet, sapien urna pretium nisl, ut volutpat sapien arcu sed augue. Aliquam erat volutpat. In congue. Etiam justo. Etiam pretium iaculis justo. In hac habitasse platea dictumst.', 'Coleraine', 55.1326, -6.6646, 0, 5);
+            INSERT INTO teacher (teacher_id, tagline, bio, location_title, location_latitude, location_longitude, average_review_score, user_id) VALUES (6, 'Morbi quis tortor id nulla ultrices aliquet.', 'Vivamus vestibulum sagittis sapien. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Etiam vel augue. Vestibulum rutrum rutrum neque. Aenean auctor gravida sem. Praesent id massa id nisl venenatis lacinia. Aenean sit amet justo. Morbi ut odio. Cras mi pede, malesuada in, imperdiet et, commodo vulputate, justo. In blandit ultrices enim. Lorem ipsum dolor sit amet, consectetuer adipiscing elit.', 'Glasgow', 55.8617, -4.2583, 0, 6);
+            INSERT INTO teacher (teacher_id, tagline, bio, location_title, location_latitude, location_longitude, average_review_score, user_id) VALUES (7, 'Etiam pretium iaculis justo.', 'Quisque porta volutpat erat. Quisque erat eros, viverra eget, congue eget, semper rutrum, nulla. Nunc purus. Phasellus in felis. Donec semper sapien a libero. Nam dui.', 'Cork', 51.8985, -8.4756, 0, 7);
+            INSERT INTO teacher (teacher_id, tagline, bio, location_title, location_latitude, location_longitude, average_review_score, user_id) VALUES (8, 'Cras pellentesque volutpat dui.', 'Donec ut mauris eget massa tempor convallis. Nulla neque libero, convallis eget, eleifend luctus, ultricies eu, nibh. Quisque id justo sit amet sapien dignissim vestibulum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla dapibus dolor vel est. Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros. Vestibulum ac est lacinia nisi venenatis tristique. Fusce congue, diam id ornare imperdiet, sapien urna pretium nisl, ut volutpat sapien arcu sed augue. Aliquam erat volutpat. In congue.', 'Derry', 54.9965, -7.3101, 0, 8);
+            INSERT INTO teacher (teacher_id, tagline, bio, location_title, location_latitude, location_longitude, average_review_score, user_id) VALUES (9, 'Pellentesque eget nunc.', 'Maecenas tristique, est et tempus semper, est quam pharetra magna, ac consequat metus sapien ut nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris viverra diam vitae quam. Suspendisse potenti. Nullam porttitor lacus at turpis. Donec posuere metus vitae ipsum. Aliquam non mauris. Morbi non lectus. Aliquam sit amet diam in magna bibendum imperdiet. Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis. Fusce posuere felis sed lacus. Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl.', 'Newcastle', 54.9783, -1.6178, 0, 9);
+            INSERT INTO teacher (teacher_id, tagline, bio, location_title, location_latitude, location_longitude, average_review_score, user_id) VALUES (10, 'Quisque ut erat.', 'Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Etiam vel augue. Vestibulum rutrum rutrum neque. Aenean auctor gravida sem. Praesent id massa id nisl venenatis lacinia. Aenean sit amet justo. Morbi ut odio.', 'Edinburgh', 55.9533, -3.1883, 0, 10);
+            INSERT INTO teacher (teacher_id, tagline, bio, location_title, location_latitude, location_longitude, average_review_score, user_id) VALUES (11, 'Morbi non quam nec dui luctus rutrum.', 'Suspendisse potenti. Nullam porttitor lacus at turpis. Donec posuere metus vitae ipsum. Aliquam non mauris. Morbi non lectus. Aliquam sit amet diam in magna bibendum imperdiet. Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis. Fusce posuere felis sed lacus. Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl. Nunc rhoncus dui vel sem.', 'Bristol', 51.4545, -2.5879, 0, 11);
+            INSERT INTO teacher (teacher_id, tagline, bio, location_title, location_latitude, location_longitude, average_review_score, user_id) VALUES (12, 'Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.', 'Curabitur gravida nisi at nibh. In hac habitasse platea dictumst. Aliquam augue quam, sollicitudin vitae, consectetuer eget, rutrum at, lorem. Integer tincidunt ante vel ipsum. Praesent blandit lacinia erat. Vestibulum sed magna at nunc commodo placerat.', 'Dundonald', 54.5931, -5.7946, 0, 12);
+            INSERT INTO teacher (teacher_id, tagline, bio, location_title, location_latitude, location_longitude, average_review_score, user_id) VALUES (13, 'Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.', 'Vivamus tortor. Duis mattis egestas metus. Aenean fermentum. Donec ut mauris eget massa tempor convallis. Nulla neque libero, convallis eget, eleifend luctus, ultricies eu, nibh. Quisque id justo sit amet sapien dignissim vestibulum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla dapibus dolor vel est. Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros. Vestibulum ac est lacinia nisi venenatis tristique. Fusce congue, diam id ornare imperdiet, sapien urna pretium nisl, ut volutpat sapien arcu sed augue. Aliquam erat volutpat.', 'Newry', 54.1751, -6.3402, 0, 13);
+            INSERT INTO teacher (teacher_id, tagline, bio, location_title, location_latitude, location_longitude, average_review_score, user_id) VALUES (14, 'Nulla facilisi.', 'Nulla tellus. In sagittis dui vel nisl. Duis ac nibh. Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus. Suspendisse potenti. In eleifend quam a odio. In hac habitasse platea dictumst. Maecenas ut massa quis augue luctus tincidunt. Nulla mollis molestie lorem.', 'Carrickfergus', 54.7262, -5.8101, 0, 14);
+            INSERT INTO teacher (teacher_id, tagline, bio, location_title, location_latitude, location_longitude, average_review_score, user_id) VALUES (15, 'Nulla facilisi.', 'Nullam sit amet turpis elementum ligula vehicula consequat. Morbi a ipsum. Integer a nibh. In quis justo. Maecenas rhoncus aliquam lacus. Morbi quis tortor id nulla ultrices aliquet. Maecenas leo odio, condimentum id, luctus nec, molestie sed, justo. Pellentesque viverra pede ac diam. Cras pellentesque volutpat dui. Maecenas tristique, est et tempus semper, est quam pharetra magna, ac consequat metus sapien ut nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris viverra diam vitae quam. Suspendisse potenti.', 'Omagh', 54.5977, -7.3100, 0, 15);
+
+        </sql>
+    </changeSet>
+
+</databaseChangeLog>
