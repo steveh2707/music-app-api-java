@@ -4,7 +4,6 @@ import com.stephenhanna.trebleapi.entity.User;
 import com.stephenhanna.trebleapi.model.exception.ApiExceptionModel;
 import com.stephenhanna.trebleapi.model.request.UserRequest;
 import com.stephenhanna.trebleapi.service.UserService;
-import com.stephenhanna.trebleapi.service.exception.UserNotFoundException;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;

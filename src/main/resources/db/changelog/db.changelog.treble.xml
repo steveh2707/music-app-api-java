@@ -97,7 +97,7 @@
                 average_review_score double(4, 3) default 0.000 not null,
                 user_id              int                        not null,
                 constraint `teacher-user_id`
-                    foreign key (user_id) references music_app.user (user_id)
+                    foreign key (user_id) references user (user_id)
             );
         </sql>
     </changeSet>

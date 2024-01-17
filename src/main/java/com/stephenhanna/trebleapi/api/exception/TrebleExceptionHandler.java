@@ -2,7 +2,7 @@ package com.stephenhanna.trebleapi.api.exception;
 
 import com.stephenhanna.trebleapi.model.exception.ApiExceptionModel;
 import com.stephenhanna.trebleapi.service.exception.EmailAlreadyExistsException;
-import com.stephenhanna.trebleapi.service.exception.UserNotFoundException;
+import com.stephenhanna.trebleapi.service.exception.ResourceNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,15 +13,15 @@ import java.time.Instant;
 
 @ControllerAdvice
 @Slf4j
-public class UserExceptionHandler {
+public class TrebleExceptionHandler {
 
-    @ExceptionHandler({UserNotFoundException.class})
-    public final ResponseEntity<ApiExceptionModel> userNotFoundException(UserNotFoundException e) {
+    @ExceptionHandler({ResourceNotFoundException.class})
+    public final ResponseEntity<ApiExceptionModel> resourceNotFoundException(ResourceNotFoundException e) {
         return new ResponseEntity<>(
                 ApiExceptionModel
                         .builder()
                         .exceptionMessage(e.getMessage())
-                        .message("No user exists")
+                        .message("Resource not found.")
                         .timestamp(Instant.now()).build(),
                 HttpStatus.NOT_FOUND
         );

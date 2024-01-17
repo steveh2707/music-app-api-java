@@ -4,7 +4,7 @@ import com.stephenhanna.trebleapi.entity.User;
 import com.stephenhanna.trebleapi.model.request.UserRequest;
 import com.stephenhanna.trebleapi.repository.UserRepository;
 import com.stephenhanna.trebleapi.service.exception.EmailAlreadyExistsException;
-import com.stephenhanna.trebleapi.service.exception.UserNotFoundException;
+import com.stephenhanna.trebleapi.service.exception.ResourceNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +21,16 @@ public class UserService {
         return userRepository.findAll();
     }
 
+    public User getUserById(int userId) {
+        User user = userRepository.findById(userId).orElse(null);
+
+        if (user == null) {
+            throw new ResourceNotFoundException("User not found.");
+        }
+
+        return user;
+    }
+
     public void addNewUser(UserRequest userRequest) {
         Optional<User> userWithEmail = userRepository.findUserByEmail(userRequest.getEmail());
 
@@ -33,13 +43,4 @@ public class UserService {
         userRepository.save(user);
     }
 
-    public User getUserById(int userId) {
-        User user = userRepository.findUserByUserId(userId).orElse(null);
-
-        if (user == null) {
-            throw new UserNotFoundException();
-        }
-
-        return user;
-    }
 }
