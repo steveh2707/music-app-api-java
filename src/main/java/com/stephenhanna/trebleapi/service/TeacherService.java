@@ -2,12 +2,15 @@ package com.stephenhanna.trebleapi.service;
 
 import com.stephenhanna.trebleapi.entity.Teacher;
 import com.stephenhanna.trebleapi.entity.User;
+import com.stephenhanna.trebleapi.model.request.TeacherRequest;
 import com.stephenhanna.trebleapi.repository.TeacherRepository;
+import com.stephenhanna.trebleapi.service.exception.EmailAlreadyExistsException;
 import com.stephenhanna.trebleapi.service.exception.ResourceNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -20,12 +23,8 @@ public class TeacherService {
     }
 
     public Teacher getTeacherById(int teacherId) {
-        Teacher teacher = teacherRepository.findById(teacherId).orElse(null);
-
-        if (teacher == null) {
-            throw new ResourceNotFoundException("Teacher not found.");
-        }
-
-        return teacher;
+        return teacherRepository.findById(teacherId).orElseThrow(() ->
+                new ResourceNotFoundException("Teacher not found."));
     }
+
 }

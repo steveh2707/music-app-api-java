@@ -3,6 +3,8 @@ package com.stephenhanna.trebleapi.api;
 import com.stephenhanna.trebleapi.entity.Teacher;
 import com.stephenhanna.trebleapi.entity.User;
 import com.stephenhanna.trebleapi.model.exception.ApiExceptionModel;
+import com.stephenhanna.trebleapi.model.request.TeacherRequest;
+import com.stephenhanna.trebleapi.model.request.UserRequest;
 import com.stephenhanna.trebleapi.service.TeacherService;
 import com.stephenhanna.trebleapi.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -12,10 +14,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -37,6 +36,15 @@ public class TeacherController {
         return teacherService.getTeachers();
     }
 
+//    @PostMapping
+//    @Operation(summary = "New teacher", responses = {
+//            @ApiResponse(responseCode = "201"),
+//            @ApiResponse(responseCode = "500", description = "Internal Error", content = @Content(schema = @Schema(implementation = ApiExceptionModel.class)))
+//    })
+//    public int createTeacher(@RequestBody TeacherRequest teacherRequest) {
+//        return teacherService.createTeacher(teacherRequest);
+//    }
+
     @GetMapping("/{teacherId}")
     @Operation(summary = "Get teacher by id", responses = {
             @ApiResponse(responseCode = "200"),
@@ -46,5 +54,6 @@ public class TeacherController {
     public Teacher getTeacherById(@PathVariable int teacherId) {
         return teacherService.getTeacherById(teacherId);
     }
+
 
 }

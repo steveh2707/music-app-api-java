@@ -6,6 +6,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import java.util.List;
+import java.util.Set;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -24,7 +27,18 @@ public class Teacher {
     private double averageReviewScore;
 
     @ToString.Exclude
-    @OneToOne
-    @JoinColumn(name = "user_id", nullable = false, referencedColumnName = "user_id")
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id", referencedColumnName = "user_id")
     private User user;
+
+//    @ToString.Exclude
+//    @OneToMany(mappedBy = "teacher")
+//    private List<TeacherInstrument> playedInstruments;
+
+//    @ManyToMany
+//    @JoinTable(
+//            name = "teacher_instrument",
+//            joinColumns = @JoinColumn(name = "teacher_id"),
+//            inverseJoinColumns = @JoinColumn(name = "instrument_id"))
+//    private List<Instrument> instruments;
 }

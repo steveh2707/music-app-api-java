@@ -22,13 +22,8 @@ public class UserService {
     }
 
     public User getUserById(int userId) {
-        User user = userRepository.findById(userId).orElse(null);
-
-        if (user == null) {
-            throw new ResourceNotFoundException("User not found.");
-        }
-
-        return user;
+        return userRepository.findById(userId).orElseThrow(() ->
+                new ResourceNotFoundException("User not found."));
     }
 
     public void addNewUser(UserRequest userRequest) {
