@@ -12,4 +12,4 @@ EXPOSE 8080
 #ENV MYSQL_DATABASE ${MYSQL_DATABASE}
 #ENV MYSQL_USER ${MYSQL_USER}
 #ENV MYSQL_PASSWORD ${MYSQL_PASSWORD}
-ENTRYPOINT["java", "-jar", "app/app.jar"]
+CMD ["java", "-jar", "app/app.jar"]
