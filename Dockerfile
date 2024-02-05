@@ -1,6 +1,6 @@
 FROM eclipse-temurin:17-jre-ubi9-minimal
 WORKDIR /app
-COPY target/*.jar app.jar
+COPY target/*.jar /app/app.jar
 EXPOSE 8080
 #ARG MYSQL_HOST
 #ARG MYSQL_PORT
@@ -10,6 +10,6 @@ EXPOSE 8080
 ENV MYSQL_HOST=localhost
 ENV MYSQL_PORT=3306
 ENV MYSQL_DATABASE=treble_db
-ENV MYSQL_USER root
-ENV MYSQL_PASSWORD Password1
+ENV MYSQL_USER=root
+ENV MYSQL_PASSWORD=Password1
 CMD ["java", "-jar", "app/app.jar"]
