@@ -23,7 +23,7 @@ jobs:
           MYSQL_DATABASE: "treble_db"
           MYSQL_USER: "root"
           MYSQL_PASSWORD: "Password1"
-        run: mvn -DMYSQL_HOST=${MYSQL_HOST} -DMYSQL_PORT=${MYSQL_PORT} -MYSQL_DATABASE=${MYSQL_DATABASE} -DMYSQL_USER=${MYSQL_USER} -DMYSQL_PASSWORD=${MYSQL_PASSWORD} clean install
+        run: mvn -DMYSQL_HOST=${MYSQL_HOST} -DMYSQL_PORT=${MYSQL_PORT} -DMYSQL_DATABASE=${MYSQL_DATABASE} -DMYSQL_USER=${MYSQL_USER} -DMYSQL_PASSWORD=${MYSQL_PASSWORD} clean install
       - name: Build & Push the Docker image
         run: |
           docker build --build-arg
