@@ -17,13 +17,18 @@ jobs:
           distribution: 'temurin'
           cache: maven
       - name: Build with Maven
-        env:
-          MYSQL_HOST: "localhost"
-          MYSQL_PORT: "3306"
-          MYSQL_DATABASE: "treble_db"
-          MYSQL_USER: "root"
-          MYSQL_PASSWORD: "Password1"
-        run: mvn -DMYSQL_HOST=${MYSQL_HOST} -DMYSQL_PORT=${MYSQL_PORT} -DMYSQL_DATABASE=${MYSQL_DATABASE} -DMYSQL_USER=${MYSQL_USER} -DMYSQL_PASSWORD=${MYSQL_PASSWORD} clean install
-      - name: Build & Push the Docker image
-        run: |
-          docker build --build-arg
+        run: mvn clean install
+#      - name: Build & Push the Docker image
+#        env:
+#          MYSQL_HOST: "localhost"
+#          MYSQL_PORT: "3306"
+#          MYSQL_DATABASE: "treble_db"
+#          MYSQL_USER: "root"
+#          MYSQL_PASSWORD: "Password1"
+#        uses: mr-smithers-excellent/docker-build-push@v6
+#        with:
+#          image: music-app-api-java/app
+#          tags: latest
+#          registry: docker.io
+#          dockerfile: Dockerfile
+#          buildArgs: 'MYSQL_HOST=localhost'
