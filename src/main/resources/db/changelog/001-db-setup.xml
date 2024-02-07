@@ -104,9 +104,7 @@
 
     <changeSet  id="4"  author="stephen.hanna">
         <preConditions onFail="WARN">
-            <not>
-                <tableExists tableName="teacher"></tableExists>
-            </not>
+            <tableExists tableName="teacher"></tableExists>
         </preConditions>
         <sql>
             INSERT INTO teacher (teacher_id, tagline, bio, location_title, location_latitude, location_longitude, average_review_score, user_id) VALUES (1, 'Test Etiam tincidunt leo suscipit malesuada condimentum.', 'psum dolor sit amet, consectetur adipiscing elit. Fusce lorem turpis, semper eget arcu et, elementum accumsan justo. Nulla elementum urna a libero viverra, porttitor eleifend enim euismod. Etiam tincidunt leo suscipit malesuada condimentum. Duis vitae leo condimentum, volutpat nisi sed, ultrices lorem. Sed quis molestie purus, sit amet ullamcorper risus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Pellentesque vitae tincidunt odio. Phasellus fermentum nunc ut nisi aliquam condimentum. Suspendisse aliquet efficitur lectus, eget consequat ante pharetra ut. Suspendisse dictum ipsum quis metus vestibulum consectetur. Nunc convallis vitae nisl quis tristique. Sed efficitur ultrices ante sed malesuada. Maecenas non mi tristique tellus dictum dapibus. Nunc ornare nec ex ac porta. Maecenas ut diam sit amet urna molestie sagittis. Vestibulum eros nibh, convallis et ante et, rutrum aliquet sapien. Proin faucibus non est nec mattis. Aliquam ligula eros, posuere malesuada ligula eu, laoreet vestibulum metus. Ut nisi ante, suscipit non erat ut, iaculis facilisis eros. Cras sed nunc sit amet libero pharetra lacinia. In hac habitasse platea dictumst. Etiam dapibus tristique ante, in elementum libero congue vel. Nulla a placerat tortor, id rutrum enim. Aenean tortor justo, semper eget dapibus et, varius sed dui. ', 'Belfast', 54.5973, -5.9301, 3.75, 1);

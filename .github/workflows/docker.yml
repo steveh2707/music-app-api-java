@@ -5,10 +5,6 @@ on:
     branches: [ "ci-cd-pipelines" ]
   workflow_dispatch:
 
-env:
-  REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository }}
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -29,19 +25,3 @@ jobs:
         run: |
           docker login -u steveh2707 -p ${{ secrets.DOCKER_HUB_TOKEN }}
           docker push steveh2707/treble-java-api:latest
-        
-
-#      - name: Build & Push the Docker image
-#        env:
-#          MYSQL_HOST: "localhost"
-#          MYSQL_PORT: "3306"
-#          MYSQL_DATABASE: "treble_db"
-#          MYSQL_USER: "root"
-#          MYSQL_PASSWORD: "Password1"
-#        uses: mr-smithers-excellent/docker-build-push@v6
-#        with:
-#          image: music-app-api-java/app
-#          tags: latest
-#          registry: docker.io
-#          dockerfile: Dockerfile
-#          buildArgs: 'MYSQL_HOST=localhost'
