@@ -1,4 +1,4 @@
-FROM eclipse-temurin:17-jre-ubi9-minimal
+FROM eclipse-temurin:17-jdk-jammy
 WORKDIR /app
 COPY target/*.jar app.jar
 EXPOSE 8080
