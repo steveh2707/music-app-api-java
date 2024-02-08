@@ -2,7 +2,7 @@ name: Docker Build & Deploy
 
 on:
   push:
-    branches: [ "ci-cd-pipelines" ]
+    branches: [ "main" ]
   workflow_dispatch:
 
 jobs:

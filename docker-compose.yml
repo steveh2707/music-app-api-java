@@ -1,0 +1,20 @@
+version: "3"
+services:
+  db:
+    image: mysql:latest
+    container_name: treble_db_dev
+    hostname: api
+    command: --default-authentication-plugin=caching_sha2_password
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: will-be-changed
+      MYSQL_RANDOM_ROOT_PASSWORD: yes
+      MYSQL_DATABASE: treble_db
+      MYSQL_USER: test_user
+      MYSQL_PASSWORD: test_password
+    healthcheck:
+      test: mysqladmin ping -h 127.0.0.1 -u $$MYSQL_USER --password=$$MYSQL_PASSWORD
+      interval: 5s
+      timeout: 30s
+      retries: 5
