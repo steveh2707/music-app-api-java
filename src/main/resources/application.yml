@@ -14,4 +14,4 @@ spring:
 treble:
   openapi:
     dev-url: http://${DEV_URL_BASE:localhost}:${APP_PORT:8080}
-    prod-url: TBC
+    prod-url: ${PROD_URL:TBC}
